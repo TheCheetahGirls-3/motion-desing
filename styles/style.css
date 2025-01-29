@@ -1,0 +1,22 @@
+.cepillo {
+    background-color: blue;
+    width: 20px;
+    height: 20px;
+}
+
+
+.gato {
+    background-color: red;
+    width: 60px;
+    height: 60px;
+}
+
+.container {
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}

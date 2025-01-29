@@ -2,12 +2,79 @@ const area = document.querySelector('.container');
 const cepillo = document.querySelector('.cepillo');
 const gato = document.querySelector('.gato');
 
-let cepillando = false;
+let animation = null;
+
+// **Función para iniciar la animación**
+function startAnimation() {
+    let brushMove = 0;
+    let catMove = 0;
+    let direction = 1;
+    let brushDirection = 1; // 1 = derecha, -1 = izquierda
+
+    animation = setInterval(() => {
+        // Movimiento del cepillo (izquierda ↔ derecha)
+        brushMove += brushDirection * 5; // Cambia la dirección del cepillo
+        if (brushMove > 20 || brushMove < -20) {
+            brushDirection *= -1;
+        }
+
+        // Movimiento del gato (arriba ↕ abajo)
+        catMove += direction * 2;
+        if (catMove > 10 || catMove < -10) {
+            direction *= -1;
+        }
+
+        // Aplicar los movimientos
+        cepillo.style.transform = `translateX(${brushMove}px)`;
+        gato.style.transform = `translateX(-50%) translateY(${catMove}px)`;
+    }, 50);
+
+    // **Detener la animación después de 3 segundos**
+    setTimeout(() => {
+        console.log("Tiempo de animación cumplido. Reiniciando...");
+        clearInterval(animation);
+        resetGame();
+    }, 3000);
+}
+
+// **Función para detectar colisión**
+function checkCollision(el1, el2) {
+    const rect1 = el1.getBoundingClientRect();
+    const rect2 = el2.getBoundingClientRect();
+
+    return !(
+        rect1.right < rect2.left ||  
+        rect1.left > rect2.right ||  
+        rect1.bottom < rect2.top ||  
+        rect1.top > rect2.bottom     
+    );
+}
+
+// **Función para colocar el cepillo encima del gato y moverlo de izquierda a derecha**
+function positionBrushOnCat() {
+    const gatoRect = gato.getBoundingClientRect();
+    const cepilloRect = cepillo.getBoundingClientRect();
+
+    // Calculamos el offset para centrar el cepillo horizontalmente y colocarlo justo encima
+    const offsetX = (gatoRect.width - cepilloRect.width) / 2;
+    const offsetY = -cepilloRect.height - 5; // Un poco más arriba del gato
+
+    cepillo.style.position = "absolute";
+    cepillo.style.left = `${gatoRect.left + offsetX}px`;
+    cepillo.style.top = `${gatoRect.top + offsetY}px`;
+}
+
+// **Función para reiniciar la posición**
+function resetGame() {
+    cepillo.style.position = "static";
+    cepillo.style.transform = "none";
+    gato.style.transform = "translateX(-50%)";
+}
 
 // Guardar la posición original del cepillo
 const posicionOriginal = {
-    parent: cepillo.parentElement, // Guarda el contenedor original
-    nextSibling: cepillo.nextSibling // Guarda el siguiente nodo hermano
+    parent: cepillo.parentElement,
+    nextSibling: cepillo.nextSibling
 };
 
 // Hacer el cepillo arrastrable
@@ -20,32 +87,26 @@ cepillo.addEventListener('dragstart', function (e) {
 // Cuando el cepillo está sobre el gato
 gato.addEventListener('dragover', (e) => {
     e.preventDefault();
-    console.log('Cepillo sobre el gato');
-    cepillando = true;
 });
 
-// Cuando el cepillo se sale del gato sin soltar el mouse
-gato.addEventListener('dragleave', () => {
-    console.log('Cepillo salió del gato');
-    cepillando = false;
-});
-
-// Si sueltas el cepillo dentro del gato
+// Si sueltas el cepillo sobre el gato
 gato.addEventListener('drop', (e) => {
     e.preventDefault();
     console.log('Cepillo soltado sobre el gato');
-    cepillando = true; // Sigue cepillando porque está sobre el gato
+
+    // **Coloca el cepillo encima del gato**
+    positionBrushOnCat();
+
+    // **Inicia la animación**
+    startAnimation();
 });
 
-// Cuando el usuario suelta el cepillo en cualquier parte
+// Si el cepillo se suelta fuera del gato, vuelve a su posición original
 cepillo.addEventListener('dragend', function (e) {
     console.log('Cepillo soltado');
-    
-    // Si el cepillo no está sobre el gato, restablecer su posición
-    if (!cepillando) {
-        posicionOriginal.parent.insertBefore(cepillo, posicionOriginal.nextSibling);
-    }
 
-    cepillando = false;
-    cepillo.classList.remove("arrastrando");
+    if (!checkCollision(cepillo, gato)) {
+        posicionOriginal.parent.insertBefore(cepillo, posicionOriginal.nextSibling);
+        resetGame();
+    }
 });

@@ -1,17 +1,33 @@
 .cepillo {
-    background-color: blue;
-    width: 20px;
-    height: 20px;
+    background-image: url('../assets/img/brush.png');
+    width: 100px; /* Ancho del cepillo */
+    height: 100px; /* Altura del cepillo */
+    background-size: contain; /* Ajustar la imagen al tamaño del div */
+    background-repeat: no-repeat; /* Evitar que la imagen se repita */
+    background-position: center; /* Centrar la imagen en el div */
+    cursor: grab; /* Cambiar el cursor al arrastrar */
+    position: absolute; /* Posicionamiento absoluto para poder moverlo */
+    left: 10%; /* Posición inicial desde la izquierda */
+    top: 20%; /* Posición inicial desde la parte superior */
 }
 
 
 .gato {
-    background-color: red;
-    width: 60px;
-    height: 60px;
+    background-image: url('../assets/img/pusheen.png');
+
+    width: 300px; /* Ancho del gato */
+    height: 200px; /* Altura del gato */
+    background-size: contain; /* Ajustar la imagen al tamaño del div */
+    background-repeat: no-repeat; /* Evitar que la imagen se repita */
+    background-position: center; /* Centrar la imagen en el div */
+    position: absolute; /* Posicionamiento absoluto para poder moverlo */
+    bottom: 40%; /* Ajustar el gato en la parte inferior del contenedor */
+    left: 50%; /* Centrar el gato horizontalmente */
+    transform: translateX(-50%); /* Centrar el gato */
 }
 
 .container {
+    
     width: 100%;
     min-height: 300px;
     display: flex;

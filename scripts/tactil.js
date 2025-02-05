@@ -1,6 +1,7 @@
 const area = document.querySelector('.container');
 const cepillo = document.getElementById('cepillo');
 const gato = document.getElementById('gato');
+const audio = document.getElementById('miau');
 
 let animation = null;
 
@@ -35,7 +36,7 @@ function startAnimation() {
         console.log("Tiempo de animación cumplido. Reiniciando...");
         clearInterval(animation);
         resetGame();
-    }, 3000);
+    }, 10000);
 }
 
 // **Función para detectar colisión**
@@ -100,6 +101,7 @@ gato.addEventListener('drop', (e) => {
 
     // **Inicia la animación**
     startAnimation();
+    audio.play();
 });
 
 // Si el cepillo se suelta fuera del gato, vuelve a su posición original
@@ -108,6 +110,7 @@ cepillo.addEventListener('dragend', function (e) {
 
     if (!checkCollision(cepillo, gato)) {
         posicionOriginal.parent.insertBefore(cepillo, posicionOriginal.nextSibling);
+        audio.pause();
         resetGame();
     }
 });

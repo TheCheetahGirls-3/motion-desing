@@ -109,7 +109,7 @@ cepillo.addEventListener('dragend', function (e) {
     console.log('Cepillo soltado');
 
     if (!checkCollision(cepillo, gato)) {
-        posicionOriginal.parent.insertBefore(cepillo, posicionOriginal.nextSibling);
+        posicionOriginal.parent.insertBefore(cepillo, posicionOriginal.parent);
         audio.pause();
         resetGame();
     }

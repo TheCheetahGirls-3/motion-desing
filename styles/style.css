@@ -6,8 +6,8 @@
     background-position: center; /* Centrar la imagen en el div */
     cursor: grab; /* Cambiar el cursor al arrastrar */
     position: absolute; /* Posicionamiento absoluto para poder moverlo */
-    left: 10%; /* Posición inicial desde la izquierda */
-    top: 20%; /* Posición inicial desde la parte superior */
+    left: 50%; /* Posición inicial desde la izquierda */
+    top: 10%; /* Posición inicial desde la parte superior */
 }
 
 

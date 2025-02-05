@@ -1,5 +1,4 @@
-.cepillo {
-    background-image: url('../assets/img/brush.png');
+#cepillo {
     width: 100px; /* Ancho del cepillo */
     height: 100px; /* Altura del cepillo */
     background-size: contain; /* Ajustar la imagen al tamaño del div */
@@ -12,9 +11,7 @@
 }
 
 
-.gato {
-    background-image: url('../assets/img/pusheen.png');
-
+#gato {
     width: 300px; /* Ancho del gato */
     height: 200px; /* Altura del gato */
     background-size: contain; /* Ajustar la imagen al tamaño del div */
@@ -24,6 +21,7 @@
     bottom: 40%; /* Ajustar el gato en la parte inferior del contenedor */
     left: 50%; /* Centrar el gato horizontalmente */
     transform: translateX(-50%); /* Centrar el gato */
+    z-index: -1;
 }
 
 .container {

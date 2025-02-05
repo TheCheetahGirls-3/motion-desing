@@ -1,6 +1,6 @@
 const area = document.querySelector('.container');
-const cepillo = document.querySelector('.cepillo');
-const gato = document.querySelector('.gato');
+const cepillo = document.getElementById('cepillo');
+const gato = document.getElementById('gato');
 
 let animation = null;
 
@@ -27,6 +27,7 @@ function startAnimation() {
         // Aplicar los movimientos
         cepillo.style.transform = `translateX(${brushMove}px)`;
         gato.style.transform = `translateX(-50%) translateY(${catMove}px)`;
+        
     }, 50);
 
     // **Detener la animación después de 3 segundos**
@@ -57,7 +58,7 @@ function positionBrushOnCat() {
 
     // Calculamos el offset para centrar el cepillo horizontalmente y colocarlo justo encima
     const offsetX = (gatoRect.width - cepilloRect.width) / 2;
-    const offsetY = -cepilloRect.height - 5; // Un poco más arriba del gato
+    const offsetY = cepilloRect.height -50; // Un poco más arriba del gato
 
     cepillo.style.position = "absolute";
     cepillo.style.left = `${gatoRect.left + offsetX}px`;

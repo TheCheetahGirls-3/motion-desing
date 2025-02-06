@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(249, 230, 255);
+}
+
 #cepillo {
     width: 100px; /* Ancho del cepillo */
     height: 100px; /* Altura del cepillo */
@@ -6,8 +10,9 @@
     background-position: center; /* Centrar la imagen en el div */
     cursor: grab; /* Cambiar el cursor al arrastrar */
     position: absolute; /* Posicionamiento absoluto para poder moverlo */
-    left: 50%; /* Posición inicial desde la izquierda */
-    top: 10%; /* Posición inicial desde la parte superior */
+
+    left: 43%; /* Posición inicial desde la izquierda */
+    top: 3%; /* Posición inicial desde la parte superior */
 }
 
 
@@ -25,8 +30,7 @@
 }
 
 .container {
-    
-    width: 100%;
+    width: 90%;
     min-height: 300px;
     display: flex;
     flex-direction: column;

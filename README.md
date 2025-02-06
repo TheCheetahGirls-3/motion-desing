@@ -52,7 +52,7 @@ raíz-del-proyecto/
 ├── scripts/           # Carpeta de scripts
 │   └── app.js         # Lógica de interacción
 ├── assets/            # Recursos multimedia
-│   ├── images/        # Imágenes (cepillo, gato, etc.)
+│   ├── img/        # Imágenes (cepillo, gato, etc.)
 │   └── audio/         # Audio (ronroneo)
 └── README.md          # Documentación del proyecto
 ```
